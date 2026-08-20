@@ -25,7 +25,6 @@ function renderRiskCards() {
       <div class="risk-value"><strong>${risk.value}%</strong><small>avance</small></div>
       <div class="progress"><span data-width="${risk.value}%"></span></div>
     `;
-    card.addEventListener("click", () => selectRisk(risk, card));
     riskGrid.appendChild(card);
   });
 
@@ -56,25 +55,6 @@ function renderBars() {
   });
 }
 
-function selectRisk(risk, card) {
-  document.querySelectorAll(".risk-card").forEach(c => c.classList.remove("selected"));
-  card.classList.add("selected");
-
-  const diff = risk.value - exactAverage;
-  let relation = "coincide con el promedio consolidado";
-
-  if (Math.abs(diff) >= 0.05) {
-    relation = diff > 0
-      ? `está ${Math.abs(diff).toFixed(1)} puntos porcentuales por encima del promedio consolidado`
-      : `está ${Math.abs(diff).toFixed(1)} puntos porcentuales por debajo del promedio consolidado`;
-  }
-
-  document.getElementById("detailIcon").textContent = risk.id.split("-")[1];
-  document.getElementById("detailTitle").textContent = risk.id;
-  document.getElementById("detailValue").textContent = `${risk.value}%`;
-  document.getElementById("detailDescription").textContent =
-    `${risk.id} registra un avance de ${risk.value}% y ${relation}.`;
-}
 
 function initGlobal() {
   document.getElementById("globalValue").textContent = `${globalAverage}%`;
@@ -88,7 +68,3 @@ initGlobal();
 renderRiskCards();
 renderBars();
 
-setTimeout(() => {
-  const first = document.querySelector(".risk-card");
-  if (first) first.click();
-}, 350);
