@@ -460,3 +460,19 @@ footer {
   font-size: .9rem;
   line-height: 1.6;
 }
+
+.hero-grid.hero-single {
+  grid-template-columns: 1fr;
+}
+
+.hero-grid.hero-single .global-card {
+  width: 100%;
+}
+
+.risk-card {
+  cursor: default;
+}
+
+.risk-card:hover {
+  transform: translateY(-5px);
+}
